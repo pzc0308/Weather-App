@@ -10,8 +10,10 @@
     /* @ngInject */
     function weatherController() {
         var vm = this;
-
-        activate();
+        vm.history = [];
+        vm.apiKey =  '519889fb71f27909ea9936375edcae8f'
+        vm.search = '';
+      
 
         function activate() {
 
