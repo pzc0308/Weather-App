@@ -1,30 +1,58 @@
 <!DOCTYPE html>
 <html ng-app='myApp'>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  </head>
-  <body ng-controller='weatherController as weatherCtrl'>
-  <div class='container'>
-    <h1>Weather</h1>
-  </div>
-  <div class='container'>
-    <button>San Diego</button>
-    <button>Cartago</button>
-    <button>Madrid</button>
-    <button>Honolulu</button>
-    <button>Monterosso al Mare</button>
-  </div>
-  <div class='container'>
-    <input type="text" class='form-control' ng-model='weatherCtrl.search' placeholder='Enter city here'/>
-    <button type="button" name="button">Go!</button>
-  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-  <script src="weatherapp/weather.module.js"></script>
-  <script src="weatherapp/home/weather.controller.js"></script>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body ng-controller='weatherController as vm'>
+  <h1>Origin Weather Application</h1>
+
+  <button ng-click="vm.getInfo('San Diego')" type="button" name="button">San Diego</button>
+  <button ng-click="vm.getInfo('Paris')" type="button" name="button">Paris</button>
+  <button ng-click="vm.getInfo('Cartago')" type="button" name="button">Cartago</button>
+  <button ng-click="vm.getInfo('Rome')" type="button" name="button">Rome</button>
+  <button ng-click="vm.getInfo('Ubud')" type="button" name="button">Ubud</button>
+
+  <input ng-model="vm.search" type="text" name="" value="">
+  <button ng-click="vm.getInfo(vm.search)" type="button" name="button">Go!</button>
+  <div class="row">
+    <div class="col-md-6">
+  <h1>City Information</h1>{{vm.weather.name}}
+  <h1>Temperature (F)</h1> {{vm.weather.main.temp}}
+  <h1>Pressure</h1> {{vm.weather.main.pressure}}
+  <h1>Humidity</h1> {{vm.weather.main.humidity}}
+  <h1>Lowest Temp (F)</h1> {{vm.weather.main.temp_min}}
+  <h1>Highest Temp (F)</h1> {{vm.weather.main.temp_max}}
+  <h1>Wind Speed</h1> {{vm.weather.wind.speed}}
+    </div>
+
+  <div class="col-md-6">
+    <h1>Search History</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>City Searched</th>
+          <th>Date and Time Searched</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in vm.history">
+          <td>{{item.name}}</td>
+          <td>{{item.timestamp | date: "MM/d/yy hh:mm:ss a"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script type="text/javascript" src="app.module.js"></script>
+    <script type="text/javascript" src="weather.controller.js"></script>
 
   </body>
 </html>
